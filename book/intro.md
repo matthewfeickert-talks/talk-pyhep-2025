@@ -219,7 +219,7 @@ Environments
     Prefix location: <path>/example/.pixi/envs/default
 ```
 
-Pixi has also resolved all of Awkward's dependencies as well, which we can see if we list all of the software in the `default` environment with `pixi list`
+Pixi has also resolved all of Awkward's dependencies as well, which we can see if we list all of the software in the `default` environment with [`pixi list`](https://pixi.sh/latest/reference/cli/pixi/list/)
 
 ```bash
 pixi list
@@ -265,4 +265,32 @@ typing_extensions        4.15.0     pyhcf101f3_0          50.5 KiB   conda  http
 tzdata                   2025b      h78e105d_0            120.1 KiB  conda  https://conda.anaconda.org/conda-forge/
 zipp                     3.23.0     pyhd8ed1ab_0          22.4 KiB   conda  https://conda.anaconda.org/conda-forge/
 zstd                     1.5.7      hb8e6e7a_2            554.3 KiB  conda  https://conda.anaconda.org/conda-forge/
+```
+
+We can now use the environment by either running operations inside of it with [`pixi run`](https://pixi.sh/latest/reference/cli/pixi/run/)
+
+```bash
+pixi run python
+```
+
+```
+Python 3.14.0 | packaged by conda-forge | (main, Oct 22 2025, 23:24:08) [GCC 14.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+or by spawning an interactive shell with the `default` environment activated (similar to how `conda activate` works)
+
+```bash
+pixi shell
+```
+
+```console
+(example) $
+(example) $ command -v python
+<path>/example/.pixi/envs/default/bin/python
+(example) $ python --version
+Python 3.14.0
+(example) $ python -c 'import awkward; print(awkward.__version__)'
+2.8.9
 ```
