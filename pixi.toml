@@ -1,0 +1,23 @@
+[workspace]
+channels = ["conda-forge"]
+name = "talk-pyhep-2025"
+platforms = ["linux-64", "osx-arm64"]
+version = "0.1.0"
+
+[tasks.build]
+description = "Build tutorial as static HTML website"
+cmd = "myst build --html"
+cwd = "book"
+
+[tasks.clean]
+description = "Remove exports, temp files and installed templates"
+cmd = "myst clean --yes"
+cwd = "book"
+
+[tasks.start]
+cmd = "myst start"
+cwd = "book"
+description = "Start a local server to preview the tutorial"
+
+[dependencies]
+mystmd = ">=1.6.3,<2"
