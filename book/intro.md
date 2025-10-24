@@ -334,10 +334,10 @@ By themselves `features` don't exist in an instantiated space.
 They become resolved when they are added to an `environment`.
 
 ```bash
-pixi workspace environment add --feature lab lab
+pixi workspace environment add --feature lab interactive
 ```
 ```
-✔ Added environment lab
+✔ Added environment interactive
 ```
 
 ```{code} toml
@@ -360,7 +360,7 @@ notebook = "*"
 jupyterlab = "*"
 
 [environments]
-lab = ["lab"]
+interactive = ["lab"]
 ```
 
 We can optionally resolve the `lab` feature to their specific versions by `upgrading` the `feature` dependencies
@@ -388,13 +388,182 @@ notebook = ">=7.4.7,<8"
 jupyterlab = ">=4.4.10,<5"
 
 [environments]
-lab = ["lab"]
+interactive = ["lab"]
 ```
 
-[Unless otherwise specified](https://pixi.sh/latest/tutorials/multi_environment/#non-default-environments), all `environments` build off of the `default` environment, so dependencies of the `default` environment exist in the `lab` environment as well.
+[Unless otherwise specified](https://pixi.sh/latest/tutorials/multi_environment/#non-default-environments), all `environments` build off of the `default` environment, so dependencies of the `default` environment exist in the `interactive` environment as well.
 
 To be able to run a Jupyter Lab instance and interact with Awkward we can run
 
 ```bash
-pixi run --environment lab jupyter lab
+pixi run --environment interactive jupyter lab
 ```
+
+### Tasks table
+
+Pixi has a built in task runner system.
+We can use the [`[tasks]` table](https://pixi.sh/latest/reference/pixi_manifest/#the-tasks-table) to define tasks that we would like to execute.
+
+```bash
+pixi task add --feature lab --description "Launch Jupyter Lab" lab "jupyter lab"
+```
+```
+✔ Added task `lab`: jupyter lab, description = "Launch Jupyter Lab"
+```
+
+::::{tab-set}
+
+:::{tab-item} Pixi default syntax
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 16-17
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = ">=7.4.7,<8"
+jupyterlab = ">=4.4.10,<5"
+
+[feature.lab.tasks]
+lab = { cmd = "jupyter lab", description = "Launch Jupyter Lab" }
+
+[environments]
+interactive = ["lab"]
+```
+
+:::
+
+:::{tab-item} Subtable syntax
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 16-18
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = ">=7.4.7,<8"
+jupyterlab = ">=4.4.10,<5"
+
+[feature.lab.tasks.lab]
+description = "Launch Jupyter Lab"
+cmd = "jupyter lab"
+
+[environments]
+interactive = ["lab"]
+```
+
+:::
+
+::::
+
+Which now allows us to launch Jupyter Lab in the `interactive` environment by running
+
+```bash
+pixi run lab
+```
+
+As there is only one `task` named `lab` we don't need to specify the environment it exists in, Pixi is able to determine it automatically.
+
+It is canonical for all Pixi workspaces to have a `start` task so that anyone encountering a Pixi project can explore by running
+
+```bash
+pixi run start
+```
+
+Let's add one by using the `depends-on` syntax to avoid redefining commands
+
+```bash
+pixi task add --feature lab --depends-on="lab" start ""
+```
+```
+✔ Added task `start`: , depends-on = 'lab'
+```
+
+::::{tab-set}
+
+:::{tab-item} Pixi default syntax
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 18
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = ">=7.4.7,<8"
+jupyterlab = ">=4.4.10,<5"
+
+[feature.lab.tasks]
+lab = { cmd = "jupyter lab", description = "Launch Jupyter Lab" }
+start = [{ task = "lab" }]
+
+[environments]
+interactive = ["lab"]
+```
+
+:::
+
+:::{tab-item} Subtable syntax
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 20-21
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = ">=7.4.7,<8"
+jupyterlab = ">=4.4.10,<5"
+
+[feature.lab.tasks.lab]
+description = "Launch Jupyter Lab"
+cmd = "jupyter lab"
+
+[feature.lab.tasks.start]
+depends-on = ["lab"]
+
+[environments]
+interactive = ["lab"]
+```
+
+:::
+
+::::
