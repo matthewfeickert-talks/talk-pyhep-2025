@@ -2,10 +2,18 @@
 version: 1
 project:
   id: 9b834beb-b5dd-4a3f-806a-1df7a91495cf
-  # title:
+  title: "Reproducible reuse by default: Use of Pixi for software in (Py)HEP"
   # description:
-  # keywords: []
-  # authors: []
+  keywords: ["PyHEP", "Pixi", "Python", "reproducibility"]
+  authors:
+    - name: "Matthew Feickert"
+      id: matthew-feickert
+      affiliations:
+        - id: uw-madison
+          institution: University of Wisconsin-Madison
+          department: Data Science Institute
+      orcid: "0000-0003-4124-7862"
+      github: matthewfeickert
   github: https://github.com/matthewfeickert-talks/talk-pyhep-2025
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   toc:
