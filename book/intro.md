@@ -25,6 +25,104 @@ This ensures allows for fully reproducible solves and for the two package ecosys
 The first time Pixi installs a package it will download the files to the global cache and [link the files into the environment](https://prefix.dev/blog/what-linking-means-when-installing-a-conda-package).
 When Pixi has to reinstall the same package in a different environment, the package will be linked from the same cache, making sure internet bandwidth for downloads and disk space is used as efficiently as possible.
 
-## Fist example workspace
+## Fist example project
 
-Let's begin by creating a Pixi
+Let's begin by creating a Pixi project in our `pyhep-2025-pixi-tutorial` Git repository
+
+```bash
+cd pyhep-2025-pixi-tutorial
+```
+
+with [`pixi init`](https://pixi.sh/latest/reference/cli/pixi/init/)
+
+```bash
+pixi init example
+```
+```
+✔ Created <path>/pyhep-2025-pixi-tutorial/example/pixi.toml
+```
+
+We see that a directory has been created, so let's navigate to that directory and explore its contents
+
+```bash
+cd example
+ls -1ap
+```
+```
+./
+../
+.gitattributes
+.gitignore
+pixi.toml
+```
+
+The most interesting file is the Pixi manifest `pixi.toml`.
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+[workspace]
+authors = ["Name <email>"]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+
+```
+
+The Pixi manifest is where we declaratively specify the components of software environments that we need and Pixi then resolves into software environments for the specified platforms that can be installed.
+
+### Workspace table
+
+Let's explore the [`[workspace]` table](https://pixi.sh/latest/reference/pixi_manifest/#the-workspace-table) first
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 1-6
+[workspace]
+authors = ["Name <email>"]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+
+```
+
+The `[workspace]` table defines both metadata for the project as well as information about what computing platforms to get solve the workspace for and where the packages will be installed from.
+
+The required table entries are
+
+* [`channels`](https://pixi.sh/latest/reference/pixi_manifest/#channels): Priority ordered list of conda channels to fetch packages from.
+
+**Example**:
+
+```{code} toml
+channels = ["conda-forge", "bioconda", "nvidia"]
+```
+
+* [`platforms`](https://pixi.sh/latest/reference/pixi_manifest/#platforms): List of conda recognized computing platforms the workspace supports.
+Pixi will resolve the dependencies for all platforms listed.
+
+**Example**:
+
+```{code} toml
+platforms = ["linux-64", "osx-arm64", "win-64"]
+```
+
+Given Pixi's use in multiple different computational fields there are over [20 supported platforms](https://docs.rs/rattler_conda_types/latest/rattler_conda_types/platform/enum.Platform.html).
+
+The rest is optional metadata:
+
+* [`authors`](https://pixi.sh/latest/reference/pixi_manifest/#authors-optional): Optional metadata about the author of the project.
+* [`name`](https://pixi.sh/latest/reference/pixi_manifest/#name-optional): Name of the workspace.
+If the name is not specified, the name of the directory that contains the workspace is used.
+* [`version`](https://pixi.sh/latest/reference/pixi_manifest/#version-optional): Version of the workspace
