@@ -567,3 +567,94 @@ interactive = ["lab"]
 :::
 
 ::::
+
+## Lock files
+
+Once the workspace has been defined, any Pixi operation on the workspace will result in all environments in the workspace having their dependencies resolved and then fully specified ("locked") at the digest ("hash") level in a single `pixi.lock` Pixi lock file.
+This happens **automatically and non-optionally**.
+The lock file is a YAML file that contains two definition groups: `environments` and `packages`.
+The `environments` group lists every environment in the workspace for every platform with a complete listing of all packages in the environment.
+The `packages` group lists a full definition of every package that appears in the `environments` lists, including the package's URL and digests (e.g. sha256, md5).
+These groups provide a full description of every package described in the Pixi workspace and its dependencies and constraints on other packages.
+Versioning the lock file along with the manifest file in a version control system allows for workspaces to be fully reproducible to the byte level indefinitely into the future, conditioned on the continued existence of the package indexes the workspace pulls from (e.g. conda-forge, PyPI).
+In the event that long term preservation and reproducibility are of importance, there are [community projects](https://github.com/quantco/pixi-pack) that allow for downloading all dependencies of a Pixi environment and generating a tar archive containing all of the packages, which can later be unpacked and installed.
+
+## Multi-platform support
+
+In addition to being multi-environment, Pixi allows for managing multiple platforms as well.
+We can add additional platforms to be resolved with `pixi workspace platform`.
+Let's add support for x86 Linux, Apple silicon macOS, and x86 Windows machines with
+
+```bash
+pixi workspace platform add linux-64 osx-arm64 win-64
+```
+```
+✔ Added linux-64
+✔ Added osx-arm64
+✔ Added win-64
+```
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 4
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64", "osx-arm64", "win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = ">=7.4.7,<8"
+jupyterlab = ">=4.4.10,<5"
+
+[feature.lab.tasks.start]
+depends-on = ["lab"]
+
+[feature.lab.tasks.lab]
+description = "Launch Jupyter Lab"
+cmd = "jupyter lab"
+
+[environments]
+interactive = ["lab"]
+```
+
+With that one command Pixi has fully resolved the existing workspace for all platforms, as can be seen by checking `pixi list`
+
+```console
+$ pixi list --platform linux-64 awkward
+Package      Version  Build            Size       Kind   Source
+awkward      2.8.9    pyhcf101f3_0     454.1 KiB  conda  https://conda.anaconda.org/conda-forge/
+awkward-cpp  50       py314h4a2b8d0_0  602.2 KiB  conda  https://conda.anaconda.org/conda-forge/
+$ pixi list --platform osx-arm64 awkward
+Package      Version  Build            Size       Kind   Source
+awkward      2.8.9    pyhcf101f3_0     454.1 KiB  conda  https://conda.anaconda.org/conda-forge/
+awkward-cpp  50       py314hb7f56de_0  457.9 KiB  conda  https://conda.anaconda.org/conda-forge/
+$ pixi list --platform win-64 awkward
+Package      Version  Build            Size       Kind   Source
+awkward      2.8.9    pyhcf101f3_0     454.1 KiB  conda  https://conda.anaconda.org/conda-forge/
+awkward-cpp  50       py314h396c588_0  470.6 KiB  conda  https://conda.anaconda.org/conda-forge/
+```
+
+or checking the lock file
+
+```console
+$ grep "awkward-cpp" pixi.lock
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/awkward-cpp-50-py314h4a2b8d0_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/awkward-cpp-50-py314hb7f56de_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/awkward-cpp-50-py314h396c588_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/awkward-cpp-50-py314h4a2b8d0_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/awkward-cpp-50-py314hb7f56de_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/awkward-cpp-50-py314h396c588_0.conda
+  - awkward-cpp ==50
+- conda: https://conda.anaconda.org/conda-forge/linux-64/awkward-cpp-50-py314h4a2b8d0_0.conda
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/awkward-cpp-50-py314hb7f56de_0.conda
+  - awkward-cpp-p-0
+- conda: https://conda.anaconda.org/conda-forge/win-64/awkward-cpp-50-py314h396c588_0.conda
+  - awkward-cpp-p-0
+```
