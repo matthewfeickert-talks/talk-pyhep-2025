@@ -294,3 +294,107 @@ Python 3.14.0
 (example) $ python -c 'import awkward; print(awkward.__version__)'
 2.8.9
 ```
+
+### Features and environments
+
+Pixi allows for defining multiple different environments in a single workspace.
+To do this efficiently, it has the concept of `features` which allow for defining LEGO-like **components** of environments.
+
+```bash
+pixi add --feature lab notebook jupyterlab
+```
+
+```
+✔ Added notebook
+✔ Added jupyterlab
+Added these only for feature: lab
+```
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 12-14
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = "*"
+jupyterlab = "*"
+```
+
+By themselves `features` don't exist in an instantiated space.
+They become resolved when they are added to an `environment`.
+
+```bash
+pixi workspace environment add --feature lab lab
+```
+```
+✔ Added environment lab
+```
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 16-17
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = "*"
+jupyterlab = "*"
+
+[environments]
+lab = ["lab"]
+```
+
+We can optionally resolve the `lab` feature to their specific versions by `upgrading` the `feature` dependencies
+
+```bash
+pixi upgrade --feature lab
+```
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 12-14
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = ">=7.4.7,<8"
+jupyterlab = ">=4.4.10,<5"
+
+[environments]
+lab = ["lab"]
+```
+
+[Unless otherwise specified](https://pixi.sh/latest/tutorials/multi_environment/#non-default-environments), all `environments` build off of the `default` environment, so dependencies of the `default` environment exist in the `lab` environment as well.
+
+To be able to run a Jupyter Lab instance and interact with Awkward we can run
+
+```bash
+pixi run --environment lab jupyter lab
+```
