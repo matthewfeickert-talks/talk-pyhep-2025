@@ -25,7 +25,7 @@ This ensures allows for fully reproducible solves and for the two package ecosys
 The first time Pixi installs a package it will download the files to the global cache and [link the files into the environment](https://prefix.dev/blog/what-linking-means-when-installing-a-conda-package).
 When Pixi has to reinstall the same package in a different environment, the package will be linked from the same cache, making sure internet bandwidth for downloads and disk space is used as efficiently as possible.
 
-## Fist example project
+## First example project
 
 Let's begin by creating a Pixi project in our `pyhep-2025-pixi-tutorial` Git repository
 
