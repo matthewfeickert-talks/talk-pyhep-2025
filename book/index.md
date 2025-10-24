@@ -2,8 +2,6 @@
 
 Presented at PyHEP 2025 workshop on Monday October 27th, 2025.
 
-Taught at [SciPy 2025](https://www.scipy2025.scipy.org/) as a [tutorial](https://cfp.scipy.org/scipy2025/talk/GDN8PN/) on Monday July 7th, 2025
-
 ## Abstract
 
 While advancements in software development practices across particle physics and adoption of Linux container technology have made substantial impact in the ease of replicability and reuse of analysis software stacks, the underlying software environments are still primarily bespoke builds that lack a full manifest to ensure reproducibility across time.
