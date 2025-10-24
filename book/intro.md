@@ -575,6 +575,62 @@ This happens **automatically and non-optionally**.
 The lock file is a YAML file that contains two definition groups: `environments` and `packages`.
 The `environments` group lists every environment in the workspace for every platform with a complete listing of all packages in the environment.
 The `packages` group lists a full definition of every package that appears in the `environments` lists, including the package's URL and digests (e.g. sha256, md5).
+
+```yaml
+version: 6
+environments:
+  default:
+    channels:
+    - url: https://conda.anaconda.org/conda-forge/
+    packages:
+      linux-64:
+
+...
+
+      - conda: https://conda.anaconda.org/conda-forge/noarch/awkward-2.8.9-pyhcf101f3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/awkward-cpp-50-py314h4a2b8d0_0.conda
+
+...
+
+  interactive:
+    channels:
+    - url: https://conda.anaconda.org/conda-forge/
+    packages:
+      linux-64:
+
+...
+
+      - conda: https://conda.anaconda.org/conda-forge/noarch/awkward-2.8.9-pyhcf101f3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/awkward-cpp-50-py314h4a2b8d0_0.conda
+
+
+...
+
+packages:
+
+...
+
+- conda: https://conda.anaconda.org/conda-forge/noarch/awkward-2.8.9-pyhcf101f3_0.conda
+  sha256: 4399adbde0b672bbb700c9ccbf771242ff22e1f9b3d118bc2c08a208ed7ec0fe
+  md5: 542a5edd0954812e536b47a17d774586
+  depends:
+  - python >=3.10
+  - awkward-cpp ==50
+  - importlib-metadata >=4.13.0
+  - numpy >=1.18.0
+  - packaging
+  - typing_extensions >=4.1.0
+  - fsspec >=2022.11.0
+  - python
+  license: BSD-3-Clause
+  license_family: BSD
+  size: 465034
+  timestamp: 1758425222640
+
+...
+
+```
+
 These groups provide a full description of every package described in the Pixi workspace and its dependencies and constraints on other packages.
 Versioning the lock file along with the manifest file in a version control system allows for workspaces to be fully reproducible to the byte level indefinitely into the future, conditioned on the continued existence of the package indexes the workspace pulls from (e.g. conda-forge, PyPI).
 In the event that long term preservation and reproducibility are of importance, there are [community projects](https://github.com/quantco/pixi-pack) that allow for downloading all dependencies of a Pixi environment and generating a tar archive containing all of the packages, which can later be unpacked and installed.
