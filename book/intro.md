@@ -568,7 +568,7 @@ interactive = ["lab"]
 
 ::::
 
-## Lock files
+### Lock files
 
 Once the workspace has been defined, any Pixi operation on the workspace will result in all environments in the workspace having their dependencies resolved and then fully specified ("locked") at the digest ("hash") level in a single `pixi.lock` Pixi lock file.
 This happens **automatically and non-optionally**.
@@ -635,7 +635,7 @@ These groups provide a full description of every package described in the Pixi w
 Versioning the lock file along with the manifest file in a version control system allows for workspaces to be fully reproducible to the byte level indefinitely into the future, conditioned on the continued existence of the package indexes the workspace pulls from (e.g. conda-forge, PyPI).
 In the event that long term preservation and reproducibility are of importance, there are [community projects](https://github.com/quantco/pixi-pack) that allow for downloading all dependencies of a Pixi environment and generating a tar archive containing all of the packages, which can later be unpacked and installed.
 
-## Multi-platform support
+### Multi-platform support
 
 In addition to being multi-environment, Pixi allows for managing multiple platforms as well.
 We can add additional platforms to be resolved with `pixi workspace platform`.
