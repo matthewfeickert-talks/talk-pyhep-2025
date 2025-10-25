@@ -42,3 +42,20 @@ pixi add coffea root sherpa mg5amcnlo
 $ pixi list | wc -l
 477
 ```
+
+## Setup bespoke environments on CVMFS with [`lb-conda`](https://gitlab.cern.ch/lhcb-core/lbcondawrappers) (experimental)
+
+On any machine with CVMFS mounted
+
+```console
+$ pixi global install lbcondawrappers
+└── lbcondawrappers: 0.5.2 (installed)
+    └─ exposes: lb-conda, lb-conda-dev
+$ lb-conda experimental/scikit-hep
+bash-5.1$ conda list awkward
+# packages in environment at /cvmfs/lhcbdev.cern.ch/conda/envs/experimental/scikit-hep/2025-06-13_11-40/linux-64:
+#
+# Name                    Version                   Build  Channel
+awkward                   2.8.3              pyhe01879c_1    conda-forge
+awkward-cpp               46              py313h00d2c3e_100    conda-forge
+```
