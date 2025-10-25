@@ -761,3 +761,8 @@ interactive = ["lab"]
 [pypi-dependencies]
 hist = ">=2.9.0, <3"
 ```
+
+## Version control
+
+Let's make a PR that adds all of this to our `pyhep-2025-pixi-tutorial` GitHub repository.
+If the `pixi.toml` Pixi manifest and `pixi.lock` lock file are versioned together the exact environments described in them are reproducible to digest level by anyone who clones the repository on a platform listed in the manifest.
