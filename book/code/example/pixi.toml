@@ -22,3 +22,6 @@ cmd = "jupyter lab"
 
 [environments]
 interactive = ["lab"]
+
+[pypi-dependencies]
+hist = ">=2.9.0, <3"

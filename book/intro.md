@@ -714,3 +714,50 @@ $ grep "awkward-cpp" pixi.lock
 - conda: https://conda.anaconda.org/conda-forge/win-64/awkward-cpp-50-py314h396c588_0.conda
   - awkward-cpp-p-0
 ```
+
+### Adding Python packages
+
+So far we have been operating with conda pacakges.
+Pixi has the ability to resolve conda packages and Python packages with parity from any valid Python package index (e.g. PyPI) or source control (e.g. a Git repository).
+While most Python packages in the PyHEP ecosystem have conda packages on conda-forge, in the event that you need to install from a test branch, or a local project this is useful.
+
+```bash
+pixi add --pypi hist
+```
+```
+✔ Added hist >=2.9.0, <3
+Added these as pypi-dependencies.
+```
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+:emphasize-lines: 26-27
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64", "osx-arm64", "win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = ">=7.4.7,<8"
+jupyterlab = ">=4.4.10,<5"
+
+[feature.lab.tasks.start]
+depends-on = ["lab"]
+
+[feature.lab.tasks.lab]
+description = "Launch Jupyter Lab"
+cmd = "jupyter lab"
+
+[environments]
+interactive = ["lab"]
+
+[pypi-dependencies]
+hist = ">=2.9.0, <3"
+```
