@@ -21,6 +21,7 @@ project:
     - file: index.md
     - file: setup.md
     - file: intro.md
+    - file: use-examples.md
 
 site:
   template: book-theme
