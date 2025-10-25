@@ -10,6 +10,14 @@ This applies to the Python ecosystem, hardware accelerated software, and the bro
 
 This talk will be structured as a practical hands on tutorial that will explore relevant use cases for the PyHEP community as well as provide participants with their own example repository for future reference.
 
+## References
+
+This tutorial gives is distilled from the following resources:
+
+* Matthew Feickert, Ruben Arts, John Kirkham, _[Reproducible Machine Learning Workflows for Scientists with Pixi](https://inspirehep.net/literature/3071594)_, Proceedings of 24th International SciPy Conference — SciPy 2025, July, 2025. DOI: [10.25080/nwuf8465](https://doi.org/10.25080/nwuf8465)
+* [SciPy 2025 tutorial on Reproducible Machine Learning Workflows for Scientists with Pixi](https://github.com/matthewfeickert-talks/reproducible-ml-for-scientists-with-pixi-scipy-2025), by Matthew Feickert, Ruben Arts, John Kirkham.
+* Matthew Feickert, [Reproducible Machine Learning Workflows for Scientists](https://github.com/carpentries-incubator/reproducible-ml-workflows), 2025.
+
 ## Rough Outline (50 minutes: 45 talk + 5 questions)
 
 **00:00 &ndash; 00:05 (5 min):**

@@ -1,0 +1,27 @@
+[workspace]
+channels = ["conda-forge"]
+name = "example"
+platforms = ["linux-64", "osx-arm64", "win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+awkward = ">=2.8.9,<3"
+
+[feature.lab.dependencies]
+notebook = ">=7.4.7,<8"
+jupyterlab = ">=4.4.10,<5"
+
+[feature.lab.tasks.start]
+depends-on = ["lab"]
+
+[feature.lab.tasks.lab]
+description = "Launch Jupyter Lab"
+cmd = "jupyter lab"
+
+[environments]
+interactive = ["lab"]
+
+[pypi-dependencies]
+hist = ">=2.9.0, <3"
