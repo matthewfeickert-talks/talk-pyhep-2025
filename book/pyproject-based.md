@@ -305,3 +305,54 @@ tests/test_example.py ..                                  [100%]
 
 ======================================================== 2 passed, 1 warning in 0.60s ...
 ```
+
+## When to use Pixi vs. uv?
+
+You might have noticed that these operations are defintiely slower than performing similar setup with [`uv`](https://docs.astral.sh/uv/)
+
+```console
+$ pixi global install uv
+└── uv (already installed)
+    ├─ dependencies: uv 0.9.5, python 3.14.0
+    └─ exposes: uvx, uv
+$ uv venv --python 3.14
+Using CPython 3.14.0
+Creating virtual environment at: .venv
+Activate with: source .venv/bin/activate
+$ . .venv/bin/activate
+(compiled_packaging) $ uv pip install .
+Resolved 3 packages in 858ms
+      Built rosen-cpp @ file:///home/feickert/Code/GitHub/talks/talk-pyhep-2025/book/code/packaging/compiled_packaging
+Prepared 3 packages in 6.81s
+Installed 3 packages in 22ms
+ + numpy==2.3.4
+ + rosen-cpp==0.1.dev16 (from file:///home/feickert/Code/GitHub/talks/talk-pyhep-2025/book/code/packaging/compiled_packaging)
+ + scipy==1.16.2
+(compiled_packaging) $ uv pip install pytest
+Resolved 5 packages in 118ms
+Installed 5 packages in 16ms
+ + iniconfig==2.3.0
+ + packaging==25.0
+ + pluggy==1.6.0
+ + pygments==2.19.2
+ + pytest==8.4.2
+(compiled_packaging) $ pytest tests/
+====================================================== test session starts ...
+platform linux -- Python 3.14.0, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/feickert/Code/GitHub/talks/talk-pyhep-2025/book/code/packaging/compiled_packaging
+configfile: pyproject.toml
+collected 2 items
+
+tests/test_example.py ..                                  [100%]
+
+======================================================== 2 passed in 0.81s ...
+```
+
+`uv` is optimized for Python packages and has been excellently engineered to be as efficient as possible in this space and to unlock developer capabilities.
+`uv` is limited to _only_ Python packages, though and does not have the ability to manage things that exist outside of a Python package index (e.g. build tools like `cmake`, complex or large proejcts like Boost or ROOT).
+
+:::{tip} Experiment and decide for your project
+There is no one solution for everyone here.
+You will need to experiment and decide if Pixi provides benefits given its ability to mix conda and Python packages at parity, or if `uv` and its speed is enough.
+There are also times when you want to read broken user states that might be difficult for Pixi to reach using conda packages, which are more robust.
+:::
