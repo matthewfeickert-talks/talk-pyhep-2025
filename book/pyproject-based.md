@@ -23,6 +23,8 @@ $ tree .
 ```
 
 You can clone the talk repository to get access to those files, or get them from this tutorial's source repository.
+
+Checkout the [Scientific Python org's Scientific Python Library Development Guide](https://learn.scientific-python.org/development/) for more!
 :::
 
 ## Initializing a Pixi project
