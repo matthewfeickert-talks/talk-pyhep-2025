@@ -114,7 +114,7 @@ rosen-cpp = { path = "." }
 [tool.pixi.tasks]
 ```
 
-add build tools
+or add build tools for the build process to pick up
 
 ```bash
 pixi add cxx-compiler
