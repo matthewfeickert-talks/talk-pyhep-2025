@@ -161,3 +161,6 @@ cython_debug/
 
 # version file
 src/rosen_cpp/_version.py
+# pixi environments
+.pixi/*
+!.pixi/config.toml
