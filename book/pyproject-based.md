@@ -297,7 +297,7 @@ rootdir: /home/feickert/Code/GitHub/talks/talk-pyhep-2025/book/code/packaging/co
 configfile: pyproject.toml
 collected 2 items
 
-tests/test_example.py ..                                                                                                                                                         [100%]
+tests/test_example.py ..                                  [100%]
 
 ...
 
