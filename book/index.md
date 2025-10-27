@@ -24,26 +24,22 @@ This tutorial gives is distilled from the following resources:
 **00:00 &ndash; 00:05 (5 min):**
 * Install Pixi on your machine and get a repository setup.
 
-**00:05 &ndash; 00:15 (10 min):**
+**00:05 &ndash; 00:20 (15 min):**
 * Walk through Pixi manifest
    - Explain `workspace` table
    - Show `features`
    - Show `environments`
 
-**00:15 &ndash; 00:20 (5 min):**
+**00:20 &ndash; 00:25 (5 min):**
 * Explain lock files
 
-**00:20 &ndash; 00:25 (5 min):**
+**00:25 &ndash; 00:30 (5 min):**
 * Explain adding Python packages
    - Show adding from PyPI
-   - Show adding local
-   - Show adding from remote
+   - Show adding local source
 
-**00:25 &ndash; 00:30 (5 min):**
+**00:30 &ndash; 00:35 (5 min):**
 * Show adding to `pyproject.toml` with minimal example project
 
-**00:30 &ndash; 00:40 (10 min):**
-* Show introduction to CUDA packages with
-
-**00:40 &ndash; 00:45 (5 min):**
-* Show Pixi build
+**00:35 &ndash; 00:45 (10 min):**
+* Show introduction to reproducible CUDA environments
