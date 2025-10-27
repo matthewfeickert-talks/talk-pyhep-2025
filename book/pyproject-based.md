@@ -295,7 +295,7 @@ $ pixi run test
 ✨ Pixi task (test in test): pytest tests
 ====================================================== test session starts ...
 platform linux -- Python 3.14.0, pytest-8.4.2, pluggy-1.6.0
-rootdir: /home/feickert/Code/GitHub/talks/talk-pyhep-2025/book/code/packaging/compiled_packaging
+rootdir: <path>/compiled_packaging
 configfile: pyproject.toml
 collected 2 items
 
@@ -322,11 +322,11 @@ Activate with: source .venv/bin/activate
 $ . .venv/bin/activate
 (compiled_packaging) $ uv pip install .
 Resolved 3 packages in 858ms
-      Built rosen-cpp @ file:///home/feickert/Code/GitHub/talks/talk-pyhep-2025/book/code/packaging/compiled_packaging
+      Built rosen-cpp @ file:///<path>/compiled_packaging
 Prepared 3 packages in 6.81s
 Installed 3 packages in 22ms
  + numpy==2.3.4
- + rosen-cpp==0.1.dev16 (from file:///home/feickert/Code/GitHub/talks/talk-pyhep-2025/book/code/packaging/compiled_packaging)
+ + rosen-cpp==0.1.dev16 (from file:///<path>/compiled_packaging)
  + scipy==1.16.2
 (compiled_packaging) $ uv pip install pytest
 Resolved 5 packages in 118ms
@@ -339,7 +339,7 @@ Installed 5 packages in 16ms
 (compiled_packaging) $ pytest tests/
 ====================================================== test session starts ...
 platform linux -- Python 3.14.0, pytest-8.4.2, pluggy-1.6.0
-rootdir: /home/feickert/Code/GitHub/talks/talk-pyhep-2025/book/code/packaging/compiled_packaging
+rootdir: <path>/compiled_packaging
 configfile: pyproject.toml
 collected 2 items
 
