@@ -14,6 +14,7 @@ This talk will be structured as a practical hands on tutorial that will explore 
 
 This tutorial gives is distilled from the following resources:
 
+* [Pixi docs: Python tutorial](https://pixi.sh/latest/python/tutorial/)
 * Matthew Feickert, Ruben Arts, John Kirkham, _[Reproducible Machine Learning Workflows for Scientists with Pixi](https://inspirehep.net/literature/3071594)_, Proceedings of 24th International SciPy Conference — SciPy 2025, July, 2025. DOI: [10.25080/nwuf8465](https://doi.org/10.25080/nwuf8465)
 * [SciPy 2025 tutorial on Reproducible Machine Learning Workflows for Scientists with Pixi](https://github.com/matthewfeickert-talks/reproducible-ml-for-scientists-with-pixi-scipy-2025), by Matthew Feickert, Ruben Arts, John Kirkham.
 * Matthew Feickert, [Reproducible Machine Learning Workflows for Scientists](https://github.com/carpentries-incubator/reproducible-ml-workflows), 2025.
