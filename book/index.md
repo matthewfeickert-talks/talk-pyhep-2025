@@ -1,6 +1,6 @@
 # [Reproducible reuse by default: Use of Pixi for software in (Py)HEP](https://indico.cern.ch/event/1566263/contributions/6733144/)
 
-Presented at PyHEP 2025 workshop on Monday October 27th, 2025.
+Presented at [PyHEP 2025 workshop on Monday October 27th, 2025](https://indico.cern.ch/event/1566263/contributions/6733144/).
 
 ## Abstract
 
