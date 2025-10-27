@@ -29,7 +29,7 @@ Checkout the [Scientific Python org's Scientific Python Library Development Guid
 
 ## Initializing a Pixi project
 
-If you initialize a Pixi project in the same directory as a [`pyproject.toml`](https://github.com/matthewfeickert-talks/talk-odsl-forum-seminar-2023/blob/d23b038df8969c02b89b9682ccb71199df88aa7e/examples/compiled_packaging/pyproject.toml), it will prompt you to create the Pixi workspace as a `[tool.pixi]` subtable in the `pyproject.toml`
+If you initialize a Pixi project in the same directory as a [`pyproject.toml`](https://github.com/matthewfeickert-talks/talk-pyhep-2025/blob/6799e8a0deb07ab44bfbc69ed2177cbd07138670/book/code/packaging/rosen_pre_pixi/pyproject.toml), it will prompt you to create the Pixi workspace as a `[tool.pixi]` subtable in the `pyproject.toml`
 
 ```bash
 pixi init
