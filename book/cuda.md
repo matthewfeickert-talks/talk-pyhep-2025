@@ -131,11 +131,12 @@ All of this now allows us to do things like
 
 ```bash
 pixi workspace system-requirements add cuda 12
-pixi add pytorch-gpu
+pixi add pytorch-gpu 'cuda-version 12.9.*'
 ```
 
 ```
 ✔ Added pytorch-gpu >=2.8.0,<3
+✔ Added cuda-version 12.9.*
 ```
 
 and arrive at a fully specified and locked CUDA accelerated environment with PyTorch
@@ -172,3 +173,26 @@ cuda-version          12.9     h4f385c5_3  21.1 KiB   conda  https://conda.anaco
 $ pixi run python -c 'import torch; print(torch.cuda.is_available())'
 True
 ```
+
+:::{tip} Solving CUDA environments without CUDA
+
+What's very powerful about this functionality is that it allows for solving environments with CUDA dependencies when the platform that Pixi is doing the solve on **doesn't have CUDA support**.
+This allows for targeting remote machines that will be the execution environment from whatever laptop you have.
+
+**Example on `osx-arm64`**:
+
+```console
+% pixi init example && cd example
+% pixi workspace system-requirements add cuda 12
+% pixi add --platform linux-64 pytorch-gpu 'cuda-version 12.9.*'
+% pixi list --platform linux-64 torch
+Package      Version  Build                           Size       Kind   Source
+libtorch     2.8.0    cuda129_mkl_hc64f9c6_301        836.2 MiB  conda  https://conda.anaconda.org/conda-forge/
+pytorch      2.8.0    cuda129_mkl_py313_h392364f_301  24 MiB     conda  https://conda.anaconda.org/conda-forge/
+pytorch-gpu  2.8.0    cuda129_mkl_h43a4b0b_301        46.2 KiB   conda  https://conda.anaconda.org/conda-forge/
+```
+:::
+
+## Linux containerization
+
+As covered in [Reproducible Machine Learning Workflows for Scientists](https://carpentries-incubator.github.io/reproducible-ml-workflows/pixi-deployment.html), Linux containerization can become trivially templated for deployment to remote workers with no shared filesystem or cache.

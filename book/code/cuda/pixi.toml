@@ -8,6 +8,7 @@ version = "0.1.0"
 
 [dependencies]
 pytorch-gpu = ">=2.8.0,<3"
+cuda-version = "12.9.*"
 
 [system-requirements]
 cuda = "12"
