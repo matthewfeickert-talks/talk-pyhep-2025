@@ -52,6 +52,13 @@ powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | i
 
 ::::
 
+:::{caution} Don't use Homebrew
+
+It is strongly recommended to **not** use Homebrew to install Pixi, as this breaks all of Pixi's self-update features.
+Please use one of the provided solutions above.
+
+:::
+
 #### Pixi Shell completions
 
 Additionally, install the [Pixi shell completions](https://pixi.sh/latest/advanced/installation/#autocompletion) for your particular shell choice.
