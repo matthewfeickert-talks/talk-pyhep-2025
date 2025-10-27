@@ -1,5 +1,9 @@
 # Various use examples
 
+## Use Pixi with Binder for fully reproducible Binderized environments
+
+c.f. https://github.com/matthewfeickert/pyhep-notebook-talk-example
+
 ## Install ROOT globally from conda-forge with a `pyroot` alias
 
 ```bash
