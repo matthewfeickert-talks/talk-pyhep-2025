@@ -12,7 +12,7 @@ This talk will be structured as a practical hands on tutorial that will explore 
 
 ## References
 
-This tutorial gives is distilled from the following resources:
+This tutorial's information is distilled from the following resources:
 
 * [Pixi docs: Python tutorial](https://pixi.sh/latest/python/tutorial/)
 * Matthew Feickert, Ruben Arts, John Kirkham, _[Reproducible Machine Learning Workflows for Scientists with Pixi](https://inspirehep.net/literature/3071594)_, Proceedings of 24th International SciPy Conference — SciPy 2025, July, 2025. DOI: [10.25080/nwuf8465](https://doi.org/10.25080/nwuf8465)
