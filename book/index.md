@@ -2,6 +2,8 @@
 
 Presented at [PyHEP 2025 workshop on Monday October 27th, 2025](https://indico.cern.ch/event/1566263/contributions/6733144/).
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17471943.svg)](https://doi.org/10.5281/zenodo.17471943)
+
 ## Abstract
 
 While advancements in software development practices across particle physics and adoption of Linux container technology have made substantial impact in the ease of replicability and reuse of analysis software stacks, the underlying software environments are still primarily bespoke builds that lack a full manifest to ensure reproducibility across time.
